@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>下拉手风琴导航</title>
+		<style>
+			*{/*企业开发不推荐通配符，不了解的去看看css rest */
+			margin:0;
+			padding:0;
+			}
+			html,body{
+				height:0 aout;
+			}
+			.wrap{
+				height:100%;
+				width:260px;
+				background-color:#363a45;
+			}
+			.head{
+				width:100%;
+				height:65px;
+				background-color:#44495a;
+				line-height:65px;
+				text-align: center;
+				font-size:20px;
+				color:#fff;
+			}
+			.nav{
+				width:250px;
+				margin:10px 5px;
+				/*border:1px solid red;*/
+			}
+			.nav-list{
+				margin-bottom:5px;
+			}
+			.nav-list h2{
+				/*height:50px;定宽不定高使用padding撑开*/
+				/*line-height:50px;*/
+				position:relative;/*相对定位*/
+				padding:15px 0;
+				background-color:#393c4a;
+				text-align:center;
+				font-size:16px;
+				color:#fff;
+				transition:2s;
+			}
+			.nav-list h2.on{
+				background-color:#3889d4;
+			}
+			.nav-list i{
+				position:absolute;/*绝对定位*/
+				right:10px;
+				top:15px;
+				border:8px solid transparent;/*上面是top，右边right，下是bottom，左边是left.transparent是透明*/
+				border-left-color: #fff;
+				transform-origin:1px 8px;
+				transform: rotate(0deg);/*css变化属性*/
+				transition:0.8s;
+			}
+			.nav-list i.on{
+				transform: rotate(90deg);
+			}
+			.hide{
+				overflow:hidden;/*超出隐藏*/
+				height:0;
+				transition: 0.8s;/*变化效果*/
+			}
+			.hide h5{
+				padding:10px 0;
+				background-color:#282c3a;
+				border-bottom: 1px solid #42495d;
+				text-align:center;
+				color:#fff;
+			}
+		</style>
+ </head>
+ <body>
+	<div class="wrap">
+		<div class="head">国内各地景点</div>
+		<div class="nav">
+		<ul>
+			<li class="nav-list">
+				<h2 class="on">
+				北京景点
+				<i></i>
+				</h2>
+				<div class="hide">
+					<h5>故宫</h5>
+					<h5>十三陵</h5>
+					<h5>圆明园</h5>
+					<h5>雍和宫</h5>
+					<h5>长城</h5>
+					<h5>天坛公园</h5>
+				</div>
+			</li>
+		</ul>
+		<ul>
+			<li class="nav-list">
+				<h2 class='on'>
+				北京景点
+				<i></i>
+				</h2>
+				<div class="hide">
+					<h5>故宫</h5>
+					<h5>十三陵</h5>
+					<h5>圆明园</h5>
+					<h5>雍和宫</h5>
+					<h5>长城</h5>
+					<h5>天坛公园</h5>
+				</div>
+			</li>
+		</ul>
+		</div>
+	</div>
+	<script>//js标签
+		/*
+		//潜规则-》命名规范-》驼峰命名
+		返回对象用object,返回数组用array
+		MVVM->不会直接操作DOM-》双向数据绑定
+		jq->操作DOM-》注重实现功能，现在讲究技能和效率，但是性能差
+		DOM用来生成DOM数-》去操作html
+		CSSOM-》解析css的
+		v8引擎-》解析css
+			1 在JS中如何获取元素 ->document.querySelector
+			2 在JS如何监听点击事件
+			3 在JS中如何改变CSS属性
+			4 点击当前的list然后取消上一次的样式
+			5 定义一个变量保存上一次的下标
+		*/
+		var aList = document.querySelectorAll('.nav-list h2'),//获取元素,H5新增的属性。
+			aHide = document.querySelectorAll('.hide');
+			aIcon = document.querySelectorAll('.nav-list i');
+			lastIndex = 0;//保存上一次下标
+		for (var i=0;i<aList.length;i++ ){
+			aList[i].index = i;//自定义属性保存下标
+			/*index->下标的意思
+			aList[0].index = 0;
+			aList[1].index = 1;
+			*/
+			aList[i].onclick = function(){//onclick指鼠标点击事情-》function指执行函数
+				/*console.log(this.index);//在控制台中打印， this 指向调用其所在函数的对象，而且是离谁近就是指向谁，构造函数下，this与被创建的新对象绑定；DOM事件，this指向触发事件的元素；内联事件分两种情况，bind绑定， call & apply 方法等*/
+				//消除上一次的样式
+				aHide[lastIndex].style.height = 'o';//改变css中的hight
+				aList[lastIndex].className = '#3889d4';
+				aIcon[lastIndex].className = '';
+
+				//设置当前样式
+				aHide[this.index].style.height = '245px';//改变css中的hight
+				aList[this.index].className = '#393c4a';
+				aIcon[this.index].className = 'on';
+				lastIndex = this.index;
+				console.log(this.index,lastIndex);
+			}
+		}
+	</script>
+ </body>
+</html> 
