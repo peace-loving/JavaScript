@@ -144,7 +144,7 @@
 			aList[i].onclick = function(){//onclick指鼠标点击事情-》function指执行函数
 				/*console.log(this.index);//在控制台中打印， this 指向调用其所在函数的对象，而且是离谁近就是指向谁，构造函数下，this与被创建的新对象绑定；DOM事件，this指向触发事件的元素；内联事件分两种情况，bind绑定， call & apply 方法等*/
 				//消除上一次的样式
-				aHide[lastIndex].style.height = 'o';//改变css中的hight
+				aHide[lastIndex].style.height = '0';//改变css中的hight
 				aList[lastIndex].className = '#3889d4';
 				aIcon[lastIndex].className = '';
 
